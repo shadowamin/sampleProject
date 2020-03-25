@@ -1,4 +1,4 @@
-package com.hannibalprojects.sampleproject.presentation.di
+package com.hannibalprojects.sampleproject.presentation.di.module
 
 import com.hannibalprojects.sampleproject.data.RepositoryImpl
 import com.hannibalprojects.sampleproject.data.UsersDataSource
@@ -8,6 +8,8 @@ import com.hannibalprojects.sampleproject.data.local.LocalDataSourceImpl
 import com.hannibalprojects.sampleproject.data.remote.RemoteDataSource
 import com.hannibalprojects.sampleproject.data.remote.RemoteDataSourceImpl
 import com.hannibalprojects.sampleproject.domain.Repository
+import com.hannibalprojects.sampleproject.presentation.di.module.ApiModule
+import com.hannibalprojects.sampleproject.presentation.di.module.DaoModule
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton

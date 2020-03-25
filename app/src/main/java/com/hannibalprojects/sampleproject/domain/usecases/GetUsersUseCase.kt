@@ -6,9 +6,9 @@ import com.hannibalprojects.sampleproject.domain.User
 import javax.inject.Inject
 
 
-class GetUsersUseCase @Inject constructor(private val repository: Repository) :
+open class GetUsersUseCase @Inject constructor(private val repository: Repository) :
     UseCase<DataSource.Factory<Int, User>>() {
-    override suspend fun executeOnBackground(): DataSource.Factory<Int, User> {
+    override suspend fun executeTask(): DataSource.Factory<Int, User> {
         return repository.getUsers()
     }
 }

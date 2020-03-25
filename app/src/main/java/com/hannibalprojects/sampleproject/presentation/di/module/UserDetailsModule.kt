@@ -1,6 +1,8 @@
-package com.hannibalprojects.sampleproject.presentation.di
+package com.hannibalprojects.sampleproject.presentation.di.module
 
 import androidx.lifecycle.ViewModel
+import com.hannibalprojects.sampleproject.presentation.di.ViewModelKey
+import com.hannibalprojects.sampleproject.presentation.di.ViewModelsModuleBuilder
 import com.hannibalprojects.sampleproject.presentation.frags.UserDetailsFragment
 import com.hannibalprojects.sampleproject.presentation.viewmodels.UserDetailsViewModel
 import dagger.Binds

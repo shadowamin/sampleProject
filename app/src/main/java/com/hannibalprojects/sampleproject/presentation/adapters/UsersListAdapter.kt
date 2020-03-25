@@ -15,6 +15,19 @@ import com.hannibalprojects.sampleproject.domain.User
 class UsersListAdapter(val callback: (View, User) -> Unit) :
     PagedListAdapter<User, UsersListAdapter.UserCardViewHolder>(DIFF_CALLBACK) {
 
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<User>() {
+            override fun areItemsTheSame(oldItem: User, newItem: User): Boolean =
+                oldItem.id == newItem.id
+
+
+            override fun areContentsTheSame(oldItem: User, newItem: User): Boolean =
+                oldItem == newItem
+        }
+        const val TRANSITION_AVATAR = "avatar"
+        const val TRANSITION_FirstName = "lastName"
+        const val TRANSITION_Lastame = "firstName"
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserCardViewHolder {
         val binding = DataBindingUtil.inflate<UserCardBinding>(
@@ -23,7 +36,6 @@ class UsersListAdapter(val callback: (View, User) -> Unit) :
             parent,
             false
         )
-
         return UserCardViewHolder(binding)
     }
 
@@ -40,24 +52,8 @@ class UsersListAdapter(val callback: (View, User) -> Unit) :
                 callback(holder.itemView, item)
             }
         }
-
     }
 
-    companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<User>() {
-            override fun areItemsTheSame(oldItem: User, newItem: User): Boolean =
-                oldItem.id == newItem.id
-
-
-            override fun areContentsTheSame(oldItem: User, newItem: User): Boolean =
-                oldItem == newItem
-        }
-        const val TRANSITION_AVATAR = "avatar"
-        const val TRANSITION_FirstName = "lastName"
-        const val TRANSITION_Lastame = "firstName"
-
-
-    }
 
     class UserCardViewHolder(val binding: UserCardBinding) : RecyclerView.ViewHolder(binding.root)
 }

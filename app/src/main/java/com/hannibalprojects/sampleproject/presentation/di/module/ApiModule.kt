@@ -1,4 +1,4 @@
-package com.hannibalprojects.sampleproject.presentation.di
+package com.hannibalprojects.sampleproject.presentation.di.module
 
 import com.google.gson.GsonBuilder
 import com.hannibalprojects.sampleproject.data.remote.UserApi

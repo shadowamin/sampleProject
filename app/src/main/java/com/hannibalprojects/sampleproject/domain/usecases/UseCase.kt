@@ -11,16 +11,16 @@ abstract class UseCase<T> {
     private var backgroundContext: CoroutineContext = Dispatchers.IO
     private var forgroundContext: CoroutineContext = Dispatchers.Main
 
-    protected abstract suspend fun executeOnBackground(): T
+    abstract suspend fun executeTask(): T
 
-    fun execute(block: Request<T>.() -> Unit) {
-        val response = Request<T>().apply { block() }
+    fun execute(block: Response<T>.() -> Unit) {
+        val response = Response<T>().apply { block() }
         unsubscribe()
         parentJob = Job()
-        CoroutineScope(forgroundContext + parentJob).launch {
+        CoroutineScope(forgroundContext ).launch {
             try {
                 val result = withContext(backgroundContext) {
-                    executeOnBackground()
+                    executeTask()
                 }
                 response(result)
             } catch (e: Exception) {
@@ -31,20 +31,17 @@ abstract class UseCase<T> {
                     )
                 )
             }
-
         }
-
-
     }
 
     private fun unsubscribe() {
-        parentJob.apply {
-            cancelChildren()
-            cancel()
+        if (parentJob != null) {
+            parentJob.cancelChildren()
+            parentJob.cancel()
         }
     }
 
-    class Request<T> {
+    class Response<T> {
         private var onCompleted: ((T) -> Unit)? = null
         private var onResponse: ((UsersResponse) -> Unit)? = null
 

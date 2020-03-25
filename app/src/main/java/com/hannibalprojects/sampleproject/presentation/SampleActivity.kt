@@ -12,6 +12,6 @@ class SampleActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity)
         val transaction = supportFragmentManager.beginTransaction()
         val fragmentList = ListUsersFragment()
-        transaction.add(R.id.fragment_container, fragmentList, "usersList").commit()
+        transaction.replace(R.id.fragment_container, fragmentList, "usersList").commit()
     }
 }

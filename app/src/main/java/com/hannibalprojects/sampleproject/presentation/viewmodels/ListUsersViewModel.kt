@@ -1,13 +1,14 @@
 package com.hannibalprojects.sampleproject.presentation.viewmodels
 
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.paging.DataSource
 import com.hannibalprojects.sampleproject.domain.User
-import com.hannibalprojects.sampleproject.domain.UsersResponse
 import com.hannibalprojects.sampleproject.domain.usecases.GetUsersUseCase
 import com.hannibalprojects.sampleproject.domain.usecases.RefreshUsersUseCase
 import com.hannibalprojects.sampleproject.domain.usecases.UseCase
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
 class ListUsersViewModel @Inject constructor(
@@ -15,25 +16,18 @@ class ListUsersViewModel @Inject constructor(
     private val refreshUsersUseCase: RefreshUsersUseCase
 ) : ViewModel() {
 
-
-
-    fun loadUsers(block: UseCase.Request<DataSource.Factory<Int, User>>.() -> Unit) {
+    fun loadUsers(block: UseCase.Response<DataSource.Factory<Int, User>>.() -> Unit) {
         usersUseCase.execute(block)
     }
 
     fun refreshUsers() {
-        refreshUsersUseCase.execute (myFun())
-    }
 
-    private fun myFun () : UseCase.Request<UsersResponse>.() -> Unit{
-        return {
-            onComplet {
-
-            }
+        refreshUsersUseCase.execute {
             onResponse {
-
+                Log.i("ListUsersViewModel", "code =${it.code} message =${it.message}")
             }
         }
     }
+
 
 }

@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GetUserUseCase @Inject constructor(private val repository: Repository) : UseCase<LiveData<User>>() {
     var userId =0
 
-    override suspend fun executeOnBackground(): LiveData<User> {
+    override suspend fun executeTask(): LiveData<User> {
         return repository.getUser(userId)
     }
 }

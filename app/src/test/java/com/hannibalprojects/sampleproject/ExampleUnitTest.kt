@@ -8,7 +8,7 @@ import kotlin.collections.ArrayList
 
 /**
  * Example local unit test, which will execute on the development machine (host).
- *
+ *git
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 
@@ -41,6 +41,7 @@ class ExampleUnitTest(computeFoo: () -> String) {
         val inn = "bingo".bla("kjlkj")
         val ki: ArrayList<List<Int>>.(Int) -> String = { n -> "hjgjhjhj" }
         var hm = "wdfsfw"
+
         sd.ki(5)
         Int.MAX_VALUE
         fun isOdd(x: Int) = x % 2 != 0

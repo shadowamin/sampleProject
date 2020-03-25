@@ -1,4 +1,4 @@
-package com.hannibalprojects.sampleproject.presentation.di
+package com.hannibalprojects.sampleproject.presentation.di.module
 
 import android.content.Context
 import androidx.room.Room
