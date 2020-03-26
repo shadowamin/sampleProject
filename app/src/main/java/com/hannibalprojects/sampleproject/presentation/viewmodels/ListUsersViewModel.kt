@@ -16,16 +16,13 @@ class ListUsersViewModel @Inject constructor(
     private val refreshUsersUseCase: RefreshUsersUseCase
 ) : ViewModel() {
 
-    fun loadUsers(block: UseCase.Response<DataSource.Factory<Int, User>>.() -> Unit) {
+    fun loadUsers(block: (DataSource.Factory<Int, User>) -> Unit) {
         usersUseCase.execute(block)
     }
 
     fun refreshUsers() {
-
         refreshUsersUseCase.execute {
-            onResponse {
-                Log.i("ListUsersViewModel", "code =${it.code} message =${it.message}")
-            }
+            Log.i("ListUsersViewModel", "code =${it.code} message =${it.message}")
         }
     }
 

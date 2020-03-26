@@ -14,11 +14,9 @@ class UserDetailsViewModel @Inject constructor(private val getUserUseCase: GetUs
     fun getUserDetails(id : Int){
         getUserUseCase.userId=id
         getUserUseCase.execute {
-            onComplet { it ->
                 it.observeForever {
                     observableUser.set(it)
                 }
-            }
         }
     }
 

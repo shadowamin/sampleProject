@@ -6,16 +6,16 @@ import java.lang.Exception
 import javax.inject.Inject
 
 class RemoteDataSourceImpl @Inject constructor(val userApi: UserApi) : RemoteDataSource {
-companion object {
-    const val TAG =" RemoteDataSourceImpl"
-}
+    companion object {
+        const val TAG = " RemoteDataSourceImpl"
+    }
 
     override suspend fun getUsers(): List<User>? {
         return try {
             val wsResponse = userApi.getUsers()
+            wsResponse.isSuccessful
             if (wsResponse.isSuccessful) {
-                val results = wsResponse.body()
-                results?.data
+                wsResponse.body()?.data
             } else {
                 Log.e(TAG, wsResponse.message())
                 null

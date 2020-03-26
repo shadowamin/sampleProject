@@ -60,11 +60,9 @@ class ListUsersFragment : DaggerFragment() {
         viewModel.refreshUsers()
 
         viewModel.loadUsers {
-            onComplet { it ->
                 LivePagedListBuilder(it, 5).build().observeForever {
                     adapter.submitList(it)
                 }
-            }
         }
 
         activateWorker()

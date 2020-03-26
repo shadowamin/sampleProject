@@ -14,17 +14,17 @@ class ApiModule {
 
     @Provides
     fun provideRetrofit(): Retrofit {
-        val gson = GsonBuilder()
-            .setLenient()
-            .create()
-        val okHttpClient = OkHttpClient.Builder()
-            .readTimeout(60, TimeUnit.SECONDS)
-            .connectTimeout(60, TimeUnit.SECONDS)
-            .build()
+
         return Retrofit.Builder()
             .baseUrl("https://reqres.in")
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .client(okHttpClient)
+            .addConverterFactory(
+                GsonConverterFactory.create(
+                    GsonBuilder()
+                        .setLenient()
+                        .create()
+                )
+            )
+            .client(OkHttpClient.Builder().build())
             .build()
 
     }
